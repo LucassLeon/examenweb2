@@ -2,9 +2,11 @@ package com.examen.wikiAlbum.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "categorias")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Categoria extends BaseEntity {
   @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;

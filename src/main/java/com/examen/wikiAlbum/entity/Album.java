@@ -3,11 +3,15 @@ package com.examen.wikiAlbum.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import java.time.LocalDate;
 import java.util.*;
 
 @Entity
 @Table(name = "albums")
+@JsonIgnoreProperties({"laminas", "hibernateLazyInitializer", "handler"})
 public class Album extends BaseEntity {
   @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
@@ -21,6 +25,7 @@ public class Album extends BaseEntity {
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "categoria_id")
+  @NotFound(action = NotFoundAction.IGNORE)
   private Categoria categoria;
 
   // tags como colección simple (tabla album_tags)
